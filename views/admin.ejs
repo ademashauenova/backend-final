@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="admin_styles.css">
+    <title>Admin Page</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="navbar-brand mb-0 h1 pl-4">APIs</div>
+        <button class="navbar-toggler justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-3">
+                    <a class="nav-link active" href="/admin">Programs</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="/users">Users</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Welcome to the Admin Page</h1>
+
+    <h2>Add New Research Program or Internship</h2>
+
+    <form id="addProgramForm" action="/api/programs" method="post" onsubmit="handleAddFormSubmit(event)">
+        <label for="programNameEn">Program Name (English):</label>
+        <input type="text" id="programNameEn" name="programNameEn" required>
+
+        <label for="programNameLocalized">Program Name (Localized):</label>
+        <input type="text" id="programNameLocalized" name="programNameLocalized" required>
+
+        <label for="programDescriptionEn">Program Description (English):</label>
+        <textarea id="programDescriptionEn" name="programDescriptionEn" required></textarea>
+
+        <label for="programDescriptionLocalized">Program Description (Localized):</label>
+        <textarea id="programDescriptionLocalized" name="programDescriptionLocalized" required></textarea>
+
+        <label for="image1">Image 1 URL:</label>
+        <input type="text" id="image1" name="image1" required>
+
+        <label for="image2">Image 2 URL:</label>
+        <input type="text" id="image2" name="image2" required>
+
+        <label for="image3">Image 3 URL:</label>
+        <input type="text" id="image3" name="image3" required>
+
+        <button type="submit">Add Program</button>
+    </form>
+
+    <hr>
+
+    <!-- <h2 class="mt-5">All Programs</h2>
+
+    <ul id="programsList"></ul> -->
+
+    <div class="container mt-5">
+        <h1 style="padding-top: 10%">All Programs</h1>
+
+        <div id="programsList" class="row">
+            <% programs.filter(program => !program.deletion_date).forEach(program => { %>
+                <div class="program-block row mb-4">
+                    <div class="col-md-6">
+                        <div id="carouselExample_<%= program._id %>" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="<%= program.image1 %>" class="d-block w-100" alt="Image 1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="<%= program.image2 %>" class="d-block w-100" alt="Image 2">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="<%= program.image3 %>" class="d-block w-100" alt="Image 3">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample_<%= program._id %>" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample_<%= program._id %>" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6 mt-0">
+                        <strong><%= program.programNameEn %></strong><br>
+                        <%= program.programDescriptionEn %>
+                    </div> -->
+                    <div class="col-md-6 mt-0">
+                        <strong><%= program.programNameEn %></strong><br>
+                        <%= program.programDescriptionEn %>
+                        <div class="action-buttons mt-2">
+                            <button onclick="toggleUpdateForm('<%= program._id %>')">Update</button>
+                            <button onclick="deleteProgram('<%= program._id %>')">Delete</button>
+                        </div>
+                        <div id="updateForm_<%= program._id %>" class="update-form" style="display: none;">
+                            <form onsubmit="updateProgram('<%= program._id %>', getFormData('<%= program._id %>')); return false;">
+                                <label for="programNameEn">Program Name (English):</label>
+                                    <input type="text" id="programNameEn" name="programNameEn" value="<%= program.programNameEn %>" required>
+
+                                    <label for="programNameLocalized">Program Name (Localized):</label>
+                                    <input type="text" id="programNameLocalized" name="programNameLocalized" value="<%= program.programNameLocalized %>" required>
+
+                                    <label for="programDescriptionEn">Program Description (English):</label>
+                                    <textarea id="programDescriptionEn" name="programDescriptionEn" required><%= program.programDescriptionEn %></textarea>
+
+                                    <label for="programDescriptionLocalized">Program Description (Localized):</label>
+                                    <textarea id="programDescriptionLocalized" name="programDescriptionLocalized" required><%= program.programDescriptionLocalized %></textarea>
+
+                                    <label for="image1">Image 1 URL:</label>
+                                    <input type="text" id="image1" name="image1" value="<%= program.image1 %>" required>
+
+                                    <label for="image2">Image 2 URL:</label>
+                                    <input type="text" id="image2" name="image2" value="<%= program.image2 %>" required>
+
+                                    <label for="image3">Image 3 URL:</label>
+                                    <input type="text" id="image3" name="image3" value="<%= program.image3 %>" required>
+                                
+                                    <button onclick="handleUpdateButtonClick('<%= program._id %>')">Update Program</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous">
+    </script>
+<script>
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        await getPrograms();
+    });
+
+    function getFormData(programId) {
+    return {
+        programNameEn: document.getElementById(`programNameEn_${programId}`).value,
+        programNameLocalized: document.getElementById(`programNameLocalized_${programId}`).value,
+        programDescriptionEn: document.getElementById(`programDescriptionEn_${programId}`).value,
+        programDescriptionLocalized: document.getElementById(`programDescriptionLocalized_${programId}`).value,
+        image1: document.getElementById(`image1_${programId}`).value,
+        image2: document.getElementById(`image2_${programId}`).value,
+        image3: document.getElementById(`image3_${programId}`).value,
+    };
+}
+
+function handleUpdateButtonClick(programId) {
+    updateProgram(programId, getFormData(programId));
+}
+
+
+
+
+
+    async function toggleUpdateForm(programId) {
+        const updateForm = document.getElementById(`updateForm_${programId}`);
+    
+        console.log(`Toggling form for program ID: ${programId}, Form found: ${updateForm !== null}`);
+    
+        if (updateForm) {
+            updateForm.style.display = updateForm.style.display === 'none' ? 'block' : 'none';
+        } else {
+            console.error(`Form not found for program ID: ${programId}`);
+        }
+    }
+
+
+    async function addProgram(programData) {
+        try {
+            const response = await fetch('/api/programs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(programData),
+            });
+            const data = await response.json();
+            console.log('New Program:', data);
+
+            await getPrograms();
+            clearAddProgramForm();
+        } catch (error) {
+            console.error('Error adding program:', error);
+        }
+    };
+
+
+
+
+
+    function clearAddProgramForm() {
+        document.getElementById('addProgramForm').reset();
+    };
+
+
+
+
+    async function handleAddFormSubmit(event) {
+        event.preventDefault();
+        const form = event.target;
+        const programData = {
+            programNameEn: form.programNameEn.value,
+            programNameLocalized: form.programNameLocalized.value,
+            programDescriptionEn: form.programDescriptionEn.value,
+            programDescriptionLocalized: form.programDescriptionLocalized.value,
+            image1: form.image1.value,
+            image2: form.image2.value,
+            image3: form.image3.value,
+        };
+
+        await addProgram(programData);
+    };
+  
+
+
+
+
+    // async function updateProgram(programId, updatedProgramData) {
+    //   try {
+    //     const response = await fetch(`/api/programs/${programId}`, {
+    //       method: 'PUT',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify(updatedProgramData),
+    //     });
+    //     const data = await response.json();
+    //     console.log('Updated Program:', data);
+    //   } catch (error) {
+    //     console.error('Error updating program:', error);
+    //   }
+    // }
+
+
+
+
+
+    async function updateProgram(programId, updatedProgramData) {
+        console.log('updateProgram function called');
+    try {
+        const response = await fetch(`/api/programs/${programId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedProgramData),
+        });
+        const data = await response.json();
+        console.log('Updated Program:', data);
+
+        // Fetch and update the program list after a successful update
+        await getPrograms();
+        } catch (error) {
+        console.error('Error updating program:', error);
+        }
+    }
+
+
+
+
+
+
+  
+    // Function to delete a program
+    async function deleteProgram(programId) {
+      try {
+        await fetch(`/api/programs/${programId}`, {
+          method: 'DELETE',
+        });
+        // console.log('Program deleted successfully');
+        // // Handle deletion confirmation as needed in your admin page
+        await getPrograms();
+        const data = await response.json();
+            console.log(data.message);
+            await getPrograms();
+      } catch (error) {
+        console.error('Error deleting program:', error);
+      }
+    }
+  </script>
+  
+</body>
+</html>

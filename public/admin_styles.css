@@ -1,0 +1,230 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #73b1c1;
+    margin: 0;
+    padding: 0;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300;
+}
+
+.navbar {
+    background-color: #36626a;
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    padding-left: 5%;
+    font-size: 1.5rem;
+}
+
+.navbar-toggler {
+    border: 1px solid black;
+}
+
+.navbar-toggler-icon {
+    background-color: black;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.nav-item {
+    margin-right: 20px;
+}
+
+.nav-link {
+    color: #fff !important;
+}
+
+.nav-link:hover {
+    color: #ccc !important;
+}
+
+/* form {
+    margin-bottom: 20px;
+    text-align: center;
+    /* margin-top: 2%; 
+}
+
+label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+input {
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+}
+
+button {
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #36626a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    /* border-radius: 15px; 
+}
+
+button:hover {
+    background-color: #36626a;
+} */
+
+
+/* Style for each program block */
+.program-block {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+/* Style for the program name */
+.program-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Style for the program description */
+.program-description {
+    margin-bottom: 15px;
+}
+
+/* Style for the image carousel */
+.image-carousel {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+/* Style for each image in the carousel */
+.image-carousel img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Style for update and delete buttons */
+.action-buttons button {
+    margin-right: 10px;
+}
+
+/* Style for the update form */
+.update-form {
+    display: none; /* Hidden by default */
+    margin-top: 15px;
+}
+
+
+footer {
+    padding: 1rem;
+    text-align: center;
+    bottom: 0;
+}
+
+
+.program-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.image-carousel {
+    width: 40%; /* Adjust the width of the image carousel */
+}
+
+.image-carousel img {
+    width: 100%;
+    border-radius: 8px; /* Rounded edges for images */
+}
+
+.program-details {
+    width: 55%; /* Adjust the width of the program details */
+    padding-left: 10px; /* Add some left padding for separation */
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+#addProgramForm {
+    max-width: 80%; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the form on the page */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+label {
+    width: 100%;
+}
+
+/* Adjustments for better spacing */
+label, input, textarea {
+    display: inline-block;
+}
+
+input[type="text"],
+textarea {
+    width: calc(100% - 16px);
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Add rounded corners */
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #007bff; /* Bootstrap's primary color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Add additional styling as needed */
+
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+iframe {
+    margin-top: 0;
+    width: 100%;
+    height: 445px;
+    width: 445px;
+}
+
+footer {
+    padding: 1rem;
+    text-align: center;
+    bottom: 0;
+}
+
+.carousel-inner img {
+    border-radius: 18px !important;
+    height: 300px;
+    object-fit: cover;
+}
+
