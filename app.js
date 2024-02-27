@@ -54,7 +54,7 @@ const isAuthenticated = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  if (req.session && req.session.user && req.session.user.role === 'admin') {
+  if (req.session && req.session.user && req.session.user.isAdmin === true) {
     // User is an admin
     return next();
   } else {
@@ -394,7 +394,7 @@ app.get('/ranking', isAuthenticated, async (req, res) => {
 });
 
 
-app.get('/admin', isAuthenticated, isAdmin, async (req, res) => {
+app.get('/admin',  isAdmin, async (req, res) => {
   try {
       // Fetch programs from the REST API
       const response = await fetch('http://localhost:3000/api/programs'); // Update the URL
