@@ -520,3 +520,79 @@ async function handleUpdateFormSubmit(programId) {
             <% }); %>
         </div>
     </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div id="updateForm_<%= program._id %>" class="update-form" style="display: none;">
+                            <form onsubmit="updateProgram('<%= program._id %>', getFormData('<%= program._id %>')); return false;">
+                                <label for="programNameEn">Program Name (English):</label>
+                                    <input type="text" id="programNameEn" name="programNameEn" value="<%= program.programNameEn %>" required>
+
+                                    <label for="programNameLocalized">Program Name (Localized):</label>
+                                    <input type="text" id="programNameLocalized" name="programNameLocalized" value="<%= program.programNameLocalized %>" required>
+
+                                    <label for="programDescriptionEn">Program Description (English):</label>
+                                    <textarea id="programDescriptionEn" name="programDescriptionEn" required><%= program.programDescriptionEn %></textarea>
+
+                                    <label for="programDescriptionLocalized">Program Description (Localized):</label>
+                                    <textarea id="programDescriptionLocalized" name="programDescriptionLocalized" required><%= program.programDescriptionLocalized %></textarea>
+
+                                    <label for="image1">Image 1 URL:</label>
+                                    <input type="text" id="image1" name="image1" value="<%= program.image1 %>" required>
+
+                                    <label for="image2">Image 2 URL:</label>
+                                    <input type="text" id="image2" name="image2" value="<%= program.image2 %>" required>
+
+                                    <label for="image3">Image 3 URL:</label>
+                                    <input type="text" id="image3" name="image3" value="<%= program.image3 %>" required>
+                                
+                                    <button onclick="handleUpdateButtonClick('<%= program._id %>')">Update Program</button>
+                            </form>
+                        </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            // async function updateProgram(programId, updatedProgramData) {
+    //   try {
+    //     const response = await fetch(`/api/programs/${programId}`, {
+    //       method: 'PUT',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify(updatedProgramData),
+    //     });
+    //     const data = await response.json();
+    //     console.log('Updated Program:', data);
+    //   } catch (error) {
+    //     console.error('Error updating program:', error);
+    //   }
+    // }

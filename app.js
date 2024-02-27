@@ -92,6 +92,7 @@ app.post('/api/programs', async (req, res) => {
 app.put('/api/programs/:id', async (req, res) => {
   try {
     console.log('PUT request received:', req.params.id, req.body);
+    req.body.updatedDate = new Date().toISOString();
     const updatedProgram = req.body;
     const program = await Program.findByIdAndUpdate(req.params.id, updatedProgram, { new: true });
 

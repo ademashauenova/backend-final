@@ -25,7 +25,7 @@
             </ul>
         </div>
     </nav>
-    <h1>Welcome to the Admin Page</h1>
+    <h1 style="margin-top: 5%;">Welcome to the Admin Page</h1>
 
     <h2>Add New Research Program or Internship</h2>
 
@@ -56,10 +56,6 @@
 
     <hr>
 
-    <!-- <h2 class="mt-5">All Programs</h2>
-
-    <ul id="programsList"></ul> -->
-
     <div class="container mt-5">
         <h1 style="padding-top: 10%">All Programs</h1>
 
@@ -89,10 +85,6 @@
                             </button>
                         </div>
                     </div>
-                    <!-- <div class="col-md-6 mt-0">
-                        <strong><%= program.programNameEn %></strong><br>
-                        <%= program.programDescriptionEn %>
-                    </div> -->
                     <div class="col-md-6 mt-0">
                         <strong><%= program.programNameEn %></strong><br>
                         <%= program.programDescriptionEn %>
@@ -102,28 +94,28 @@
                         </div>
                         <div id="updateForm_<%= program._id %>" class="update-form" style="display: none;">
                             <form onsubmit="updateProgram('<%= program._id %>', getFormData('<%= program._id %>')); return false;">
-                                <label for="programNameEn">Program Name (English):</label>
-                                    <input type="text" id="programNameEn" name="programNameEn" value="<%= program.programNameEn %>" required>
-
-                                    <label for="programNameLocalized">Program Name (Localized):</label>
-                                    <input type="text" id="programNameLocalized" name="programNameLocalized" value="<%= program.programNameLocalized %>" required>
-
-                                    <label for="programDescriptionEn">Program Description (English):</label>
-                                    <textarea id="programDescriptionEn" name="programDescriptionEn" required><%= program.programDescriptionEn %></textarea>
-
-                                    <label for="programDescriptionLocalized">Program Description (Localized):</label>
-                                    <textarea id="programDescriptionLocalized" name="programDescriptionLocalized" required><%= program.programDescriptionLocalized %></textarea>
-
-                                    <label for="image1">Image 1 URL:</label>
-                                    <input type="text" id="image1" name="image1" value="<%= program.image1 %>" required>
-
-                                    <label for="image2">Image 2 URL:</label>
-                                    <input type="text" id="image2" name="image2" value="<%= program.image2 %>" required>
-
-                                    <label for="image3">Image 3 URL:</label>
-                                    <input type="text" id="image3" name="image3" value="<%= program.image3 %>" required>
-                                
-                                    <button onclick="handleUpdateButtonClick('<%= program._id %>')">Update Program</button>
+                                <label for="programNameEn_<%= program._id %>">Program Name (English):</label>
+                                <input type="text" id="programNameEn_<%= program._id %>" name="programNameEn" value="<%= program.programNameEn %>" required>
+                        
+                                <label for="programNameLocalized_<%= program._id %>">Program Name (Localized):</label>
+                                <input type="text" id="programNameLocalized_<%= program._id %>" name="programNameLocalized" value="<%= program.programNameLocalized %>" required>
+                        
+                                <label for="programDescriptionEn_<%= program._id %>">Program Description (English):</label>
+                                <textarea id="programDescriptionEn_<%= program._id %>" name="programDescriptionEn" required><%= program.programDescriptionEn %></textarea>
+                        
+                                <label for="programDescriptionLocalized_<%= program._id %>">Program Description (Localized):</label>
+                                <textarea id="programDescriptionLocalized_<%= program._id %>" name="programDescriptionLocalized" required><%= program.programDescriptionLocalized %></textarea>
+                        
+                                <label for="image1_<%= program._id %>">Image 1 URL:</label>
+                                <input type="text" id="image1_<%= program._id %>" name="image1" value="<%= program.image1 %>" required>
+                        
+                                <label for="image2_<%= program._id %>">Image 2 URL:</label>
+                                <input type="text" id="image2_<%= program._id %>" name="image2" value="<%= program.image2 %>" required>
+                        
+                                <label for="image3_<%= program._id %>">Image 3 URL:</label>
+                                <input type="text" id="image3_<%= program._id %>" name="image3" value="<%= program.image3 %>" required>
+                        
+                                <button onclick="handleUpdateButtonClick('<%= program._id %>')">Update Program</button>
                             </form>
                         </div>
                     </div>
@@ -144,6 +136,19 @@
         await getPrograms();
     });
 
+    async function getPrograms() {
+      try {
+        const response = await fetch('/api/programs');
+        const data = await response.json();
+        console.log('Programs:', data);
+        // Handle the data as needed in your admin page
+      } catch (error) {
+        console.error('Error fetching programs:', error);
+      }
+    }
+
+
+
     function getFormData(programId) {
     return {
         programNameEn: document.getElementById(`programNameEn_${programId}`).value,
@@ -159,9 +164,6 @@
 function handleUpdateButtonClick(programId) {
     updateProgram(programId, getFormData(programId));
 }
-
-
-
 
 
     async function toggleUpdateForm(programId) {
@@ -189,6 +191,10 @@ function handleUpdateButtonClick(programId) {
             const data = await response.json();
             console.log('New Program:', data);
 
+            const programsList = document.getElementById('programsList');
+            const programBlock = createProgramBlock(data);
+            programsList.appendChild(programBlock);
+
             await getPrograms();
             clearAddProgramForm();
         } catch (error) {
@@ -197,14 +203,9 @@ function handleUpdateButtonClick(programId) {
     };
 
 
-
-
-
     function clearAddProgramForm() {
         document.getElementById('addProgramForm').reset();
     };
-
-
 
 
     async function handleAddFormSubmit(event) {
@@ -221,30 +222,9 @@ function handleUpdateButtonClick(programId) {
         };
 
         await addProgram(programData);
+        await refreshPrograms();
     };
   
-
-
-
-
-    // async function updateProgram(programId, updatedProgramData) {
-    //   try {
-    //     const response = await fetch(`/api/programs/${programId}`, {
-    //       method: 'PUT',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify(updatedProgramData),
-    //     });
-    //     const data = await response.json();
-    //     console.log('Updated Program:', data);
-    //   } catch (error) {
-    //     console.error('Error updating program:', error);
-    //   }
-    // }
-
-
-
 
 
     async function updateProgram(programId, updatedProgramData) {
@@ -260,7 +240,6 @@ function handleUpdateButtonClick(programId) {
         const data = await response.json();
         console.log('Updated Program:', data);
 
-        // Fetch and update the program list after a successful update
         await getPrograms();
         } catch (error) {
         console.error('Error updating program:', error);
@@ -271,16 +250,11 @@ function handleUpdateButtonClick(programId) {
 
 
 
-
-  
-    // Function to delete a program
     async function deleteProgram(programId) {
       try {
         await fetch(`/api/programs/${programId}`, {
           method: 'DELETE',
         });
-        // console.log('Program deleted successfully');
-        // // Handle deletion confirmation as needed in your admin page
         await getPrograms();
         const data = await response.json();
             console.log(data.message);
