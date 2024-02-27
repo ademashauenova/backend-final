@@ -596,3 +596,149 @@ async function handleUpdateFormSubmit(programId) {
     //     console.error('Error updating program:', error);
     //   }
     // }
+
+
+
+
+
+
+
+
+
+    <!-- <% if (universities) { %>
+    <h3>Search Results</h3>
+    <ul>
+        <% universities.forEach(university => { %>
+            <li><%= university.name %> - <%= university.country %></li>
+            <li> Website: <%= university.web_pages %></li>
+            <li> Domain:  <%= university.domains %></li>
+        <% }); %>
+    </ul>
+<% } %> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <script>
+            document.addEventListener('DOMContentLoaded', async () => {
+                await getPrograms();
+            });
+        
+            async function getPrograms() {
+                try {
+                    const response = await fetch('/api/programs');
+                    const programs = await response.json();
+        
+                    const programsList = document.getElementById('programsList');
+        
+                    programs.forEach(program => {
+                        const programBlock = document.createElement('div');
+                        programBlock.classList.add('program-block', 'row', 'mb-4');
+        
+                        const carouselContainer = document.createElement('div');
+                        carouselContainer.classList.add('col-md-6');
+                        carouselContainer.innerHTML = `
+                            <div id="carouselExample_${program._id}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="${program.image1}" class="d-block w-100" alt="Image 1">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="${program.image2}" class="d-block w-100" alt="Image 2">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="${program.image3}" class="d-block w-100" alt="Image 3">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample_${program._id}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample_${program._id}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        `;
+                        programBlock.appendChild(carouselContainer);
+        
+                        const programInfoContainer = document.createElement('div');
+                        programInfoContainer.classList.add('col-md-6');
+                        programInfoContainer.innerHTML = `
+                            <strong>${program.programNameEn}</strong><br>
+                            ${program.programDescriptionEn}
+                        `;
+                        programBlock.appendChild(programInfoContainer);
+        
+                        programsList.appendChild(programBlock);
+        
+                        // Initialize the carousel for each program
+                        new bootstrap.Carousel(document.getElementById(`carouselExample_${program._id}`));
+                    });
+        
+                } catch (error) {
+                    console.error('Error fetching programs:', error);
+                }
+            };
+    </script> -->
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await getPrograms();
+        });
+
+        async function getPrograms() {
+            try {
+                const response = await fetch('/api/programs');
+                const programs = await response.json();
+
+                const programsList = document.getElementById('programsList');
+
+                programs.forEach(program => {
+                    const programBlock = document.createElement('div');
+                    programBlock.classList.add('program-block', 'row', 'mb-4');
+
+                    const carouselContainer = document.createElement('div');
+                    carouselContainer.classList.add('col-md-6');
+                    carouselContainer.innerHTML = `
+                        <div id="carouselExample_${program._id}" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="${program.image1}" class="d-block w-100" alt="Image 1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="${program.image2}" class="d-block w-100" alt="Image 2">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="${program.image3}" class="d-block w-100" alt="Image 3">
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    programBlock.appendChild(carouselContainer);
+
+                    const programInfoContainer = document.createElement('div');
+                    programInfoContainer.classList.add('col-md-6');
+                    programInfoContainer.innerHTML = `
+                        <strong>${program.programNameEn}</strong><br>
+                        ${program.programDescriptionEn}
+                    `;
+                    programBlock.appendChild(programInfoContainer);
+
+                    programsList.appendChild(programBlock);
+                });
+
+            } catch (error) {
+                console.error('Error fetching programs:', error);
+            }
+        };
+    </script> -->

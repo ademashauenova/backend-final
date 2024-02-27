@@ -104,3 +104,7 @@ footer {
     height: 300px;
     object-fit: cover;
 }
+
+.card{
+    background-color: #f1d18a;
+}

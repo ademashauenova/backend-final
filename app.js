@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     username: String,
     password: String,
     isAdmin: { type: Boolean, default: false },
+    role: { type: String, default: 'user' },
     createdDate: { type: Date, default: Date.now },
     updatedDate: Date,
     deletedDate: Date,
@@ -41,6 +42,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: 'secret-key', resave: true, saveUninitialized: true }));
 
 app.set('view engine', 'ejs');
+
+const isAuthenticated = (req, res, next) => {
+  if (req.session && req.session.user) {
+    // User is authenticated
+    return next();
+  } else {
+    // User is not authenticated, redirect to login page
+    res.redirect('/');
+  }
+};
+
+const isAdmin = (req, res, next) => {
+  if (req.session && req.session.user && req.session.user.role === 'admin') {
+    // User is an admin
+    return next();
+  } else {
+    // User is not an admin, redirect or handle as needed
+    res.status(403).send('Unauthorized');
+  }
+};
 
 app.get('/', (req, res) => {
   res.render('login');
@@ -161,8 +182,16 @@ app.delete('/api/programs/:id', async (req, res) => {
 
 app.post('/register', async (req, res) => {
   try {
+    const existingUser = await User.findOne({ username: req.body.username });
+
+    if (existingUser) {
+      // Username already exists
+      res.status(409).send('Username already exists');
+      return;
+    }
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const user = new User({ username: req.body.username, password: hashedPassword });
+    const user = new User({ username: req.body.username, password: hashedPassword, role: 'user' });
     await user.save();
     res.redirect('/');
   } catch (error) {
@@ -187,7 +216,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/main', async (req, res) => {
+app.get('/main', isAuthenticated, async (req, res) => {
   let universities;
   // let searchInputName;
   // let searchInputCountry;
@@ -229,7 +258,7 @@ app.get('/main', async (req, res) => {
             console.log('Search Results:', universities);
         }
       
-      res.render('main', { programs, universities, searchInput});
+      res.render('main', { username: req.session.user.username, programs, universities, searchInput});
   } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -328,7 +357,7 @@ const fetch = require('node-fetch');
 //   }
 // });  
 
-app.get('/ranking', async (req, res) => {
+app.get('/ranking', isAuthenticated, async (req, res) => {
   let universities;
   try {
     const searchInput = req.query.countryCode;
@@ -357,7 +386,7 @@ app.get('/ranking', async (req, res) => {
       });
     }
 
-    res.render('ranking', { universities, searchInput });
+    res.render('ranking', { username: req.session.user.username, universities, searchInput });
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
@@ -365,7 +394,7 @@ app.get('/ranking', async (req, res) => {
 });
 
 
-app.get('/admin', async (req, res) => {
+app.get('/admin', isAuthenticated, isAdmin, async (req, res) => {
   try {
       // Fetch programs from the REST API
       const response = await fetch('http://localhost:3000/api/programs'); // Update the URL
