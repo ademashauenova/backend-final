@@ -1,65 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous">
-    <title>University Rankings</title>
-</head>
-<body>
-    <h1>Top 20 Universities by Country</h1>
-
-    <form id="searchForm" onsubmit="handleSearchFormSubmit(event)">
-        <label for="countryInput">Search by Country:</label>
-        <input type="text" id="countryInput" name="country" required>
-        <button type="submit">Search</button>
-    </form>
-
-    <ul id="universitiesList"></ul>
-
-    
-    <script>
-        async function handleSearchFormSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const countryInput = form.querySelector('#countryInput').value;
-    
-            try {
-                const response = await fetch(`/ranking?countryCode=${countryInput}`);
-                const data = await response.json();
-    
-                // Check if data contains rankings
-                if (data && data.data && data.data.rankings) {
-                    const universities = Object.values(data.data.rankings);
-    
-                    // Handle only the first 10 universities
-                    const first10Universities = universities.slice(0, 10);
-    
-                    // Update the UI with the search results
-                    const universitiesList = document.getElementById('universitiesList');
-                    universitiesList.innerHTML = '';
-    
-                    first10Universities.forEach(universityData => {
-                        const university = universityData[0];
-                        const listItem = document.createElement('li');
-                        listItem.textContent = `${university.name} - ${university.location}`;
-                        universitiesList.appendChild(listItem);
-                    });
-                } else {
-                    console.error('Error: Invalid data format');
-                }
-    
-            } catch (error) {
-                console.error('Error searching:', error);
-            }
-        }
-    </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +29,6 @@
   <h1 class="mt-5">University Ranking by Country</h1>
 
   <form action="/ranking" method="get">
-    <!-- <label for="countryCode">Enter Country Code:</label> -->
     <input type="text" id="countryCode" name="countryCode" placeholder="Enter country code: e.g. kz"required>
     <button type="submit">Search</button>
   </form>

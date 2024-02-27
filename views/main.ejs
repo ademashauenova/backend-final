@@ -100,10 +100,6 @@
                             </button>
                         </div>
                     </div>
-                    <!-- <div class="col-md-6 language-switch">
-                        <h3><%= program.programNameEn %></h3><br>
-                        <%= program.programDescriptionEn %>
-                    </div> -->
                     <div class="col-md-6">
                         <h3 id="programName_<%= program._id %>" class="language-switch"><%= program.programNameEn %></h3><br>
                         <p id="programDescription_<%= program._id %>" class="language-switch"><%= program.programDescriptionEn %></p>
@@ -120,7 +116,6 @@
 
 
 <script>
-    // Sample program data for testing
     const programsList = [
         {
             _id: "program1",
@@ -129,34 +124,24 @@
             programNameLocalized: "Program 1 (Localized)",
             programDescriptionLocalized: "Program 1 description (Localized)"
         },
-        // Add more programs as needed
     ];
 
-    // JavaScript function to change language
     function changeLanguage(language) {
         console.log(`changeLanguage called with language: ${language}`);
         const headerElement = document.getElementById('programsHeader');
 
         programsList.forEach(program => {
-            // const programNameElement = document.getElementById(`programName_${program._id}`);
-            // const programDescriptionElement = document.getElementById(`programDescription_${program._id}`);
+        const testProgramId = "program1";
+        const testProgramNameElement = document.getElementById(`programName_${testProgramId}`);
+        const testProgramDescriptionElement = document.getElementById(`programDescription_${testProgramId}`);
 
-            // if (programNameElement && programDescriptionElement) {
-            //     programNameElement.innerText = language === 'ru' ? (program.programNameLocalized || program.programNameEn) : program.programNameEn;
-            //     programDescriptionElement.innerText = language === 'ru' ? (program.programDescriptionLocalized || program.programDescriptionEn) : program.programDescriptionEn;
-            // }
-            const testProgramId = "program1";
-const testProgramNameElement = document.getElementById(`programName_${testProgramId}`);
-const testProgramDescriptionElement = document.getElementById(`programDescription_${testProgramId}`);
-
-if (testProgramNameElement && testProgramDescriptionElement) {
-    testProgramNameElement.innerText = "Test Program Name";
-    testProgramDescriptionElement.innerText = "Test Program Description";
-}
+        if (testProgramNameElement && testProgramDescriptionElement) {
+            testProgramNameElement.innerText = "Test Program Name";
+            testProgramDescriptionElement.innerText = "Test Program Description";
+        }
 
         });
 
-        // Update the header based on the selected language
         headerElement.innerText = language === 'ru'
             ? "Узнайте о стажировках и исследовательских программах в университетах мира"
             : "Learn about Internship and Research Programs in World's Universities";

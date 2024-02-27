@@ -45,40 +45,6 @@ body {
     color: #ccc !important;
 }
 
-/* form {
-    margin-bottom: 20px;
-    text-align: center;
-    /* margin-top: 2%; 
-}
-
-label {
-    font-size: 18px;
-    margin-right: 10px;
-}
-
-input {
-    padding: 8px;
-    font-size: 16px;
-    border: none;
-    border-radius: 15px;
-}
-
-button {
-    padding: 8px 12px;
-    font-size: 16px;
-    background-color: #36626a;
-    color: white;
-    border: none;
-    cursor: pointer;
-    /* border-radius: 15px; 
-}
-
-button:hover {
-    background-color: #36626a;
-} */
-
-
-/* Style for each program block */
 .program-block {
     border: 1px solid #ccc;
     padding: 20px;
@@ -86,26 +52,22 @@ button:hover {
     border-radius: 10px;
 }
 
-/* Style for the program name */
 .program-name {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-/* Style for the program description */
 .program-description {
     margin-bottom: 15px;
 }
 
-/* Style for the image carousel */
 .image-carousel {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
 }
 
-/* Style for each image in the carousel */
 .image-carousel img {
     width: 100px;
     height: 100px;
@@ -115,14 +77,12 @@ button:hover {
     border-radius: 5px;
 }
 
-/* Style for update and delete buttons */
 .action-buttons button {
     margin-right: 10px;
 }
 
-/* Style for the update form */
 .update-form {
-    display: none; /* Hidden by default */
+    display: none; 
     margin-top: 15px;
 }
 
@@ -145,17 +105,17 @@ footer {
 }
 
 .image-carousel {
-    width: 40%; /* Adjust the width of the image carousel */
+    width: 40%; 
 }
 
 .image-carousel img {
     width: 100%;
-    border-radius: 8px; /* Rounded edges for images */
+    border-radius: 8px; 
 }
 
 .program-details {
-    width: 55%; /* Adjust the width of the program details */
-    padding-left: 10px; /* Add some left padding for separation */
+    width: 55%; 
+    padding-left: 10px; 
 }
 
 .action-buttons {
@@ -164,8 +124,8 @@ footer {
 }
 
 #addProgramForm {
-    max-width: 80%; /* Adjust the maximum width as needed */
-    margin: 0 auto; /* Center the form on the page */
+    max-width: 80%;
+    margin: 0 auto; 
 }
 
 label {
@@ -177,7 +137,6 @@ label {
     width: 100%;
 }
 
-/* Adjustments for better spacing */
 label, input, textarea {
     display: inline-block;
 }
@@ -188,20 +147,18 @@ textarea {
     padding: 8px;
     margin-bottom: 12px;
     border: 1px solid #ccc;
-    border-radius: 8px; /* Add rounded corners */
+    border-radius: 8px; 
     box-sizing: border-box;
 }
 
 button {
-    background-color: #36626a; /* Bootstrap's primary color */
+    background-color: #36626a; 
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
 }
-
-/* Add additional styling as needed */
 
 
 img {
